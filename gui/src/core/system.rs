@@ -1,4 +1,5 @@
 use crate::core::util;
+use crate::ui::app::extract_widget;
 use gtk4::prelude::*;
 use gtk4::{ApplicationWindow, Builder, Button, Label};
 use log::{error, info};
@@ -16,17 +17,11 @@ pub fn check_distribution_support(main_window: &ApplicationWindow) {
         // Load error dialog from UI file
         let builder = Builder::from_resource("/xyz/xerolinux/xfprintd_gui/ui/error_dialog.ui");
 
-        let error_window: gtk4::Window = builder
-            .object("error_window")
-            .expect("Failed to get error_window");
+        let error_window: gtk4::Window = extract_widget(&builder, "error_window");
 
-        let distro_label: Label = builder
-            .object("distro_label")
-            .expect("Failed to get distro_label");
+        let distro_label: Label = extract_widget(&builder, "distro_label");
 
-        let ok_button: Button = builder
-            .object("ok_button")
-            .expect("Failed to get ok_button");
+        let ok_button: Button = extract_widget(&builder, "ok_button");
 
         distro_label.set_label(&format!("Current distribution: {}", distro_name));
         error_window.set_transient_for(Some(main_window));

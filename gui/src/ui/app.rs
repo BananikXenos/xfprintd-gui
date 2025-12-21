@@ -2,9 +2,10 @@
 
 use crate::core::{system, FingerprintContext};
 use crate::ui::{button_handlers, fingerprint_ui, navigation, pam_ui};
+use adw::prelude::*;
+use adw::Application;
 use gtk4::glib;
-use gtk4::prelude::*;
-use gtk4::{gio, Application, ApplicationWindow, Builder, CssProvider};
+use gtk4::{gio, ApplicationWindow, Builder, CssProvider};
 use log::{info, warn};
 
 use std::sync::Arc;
@@ -63,7 +64,10 @@ fn setup_resources_and_theme() {
 
     if let Some(display) = gtk4::gdk::Display::default() {
         info!("Setting up UI theme and styling");
+
         let theme = gtk4::IconTheme::for_display(&display);
+        // Don't inherit system icon themes
+        theme.set_search_path(&[]);
         theme.add_resource_path("/xyz/xerolinux/xfprintd_gui/icons");
 
         let css_provider = CssProvider::new();
@@ -81,13 +85,11 @@ fn setup_resources_and_theme() {
 
 /// Create main application window.
 fn create_main_window(app: &Application, builder: &Builder) -> ApplicationWindow {
-    let window: ApplicationWindow = builder
-        .object("app_window")
-        .expect("Failed to get app_window");
+    let window: ApplicationWindow = extract_widget(builder, "app_window");
 
     window.set_application(Some(app));
     info!("Setting window icon to fingerprint");
-    window.set_icon_name(Some("xfprintd-gui"));
+    window.set_icon_name(Some("fingerprint"));
 
     window
 }

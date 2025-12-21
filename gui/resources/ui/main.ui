@@ -1,599 +1,549 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <interface>
-  <requires lib="gtk" version="4.0" />
+    <requires lib="gtk" version="4.0"/>
+    <requires lib="adw" version="1.4"/>
 
-  <object class="GtkApplicationWindow" id="app_window">
-    <property name="title">XeroLinux Fingerprint GUI Tool</property>
-    <property name="default-width">700</property>
-    <property name="default-height">650</property>
+    <object class="AdwApplicationWindow" id="app_window">
+        <property name="title">XeroLinux Fingerprint GUI Tool</property>
+        <property name="default-width">700</property>
+        <property name="default-height">650</property>
 
-    <child>
-      <object class="GtkStack" id="stack">
-        <property name="transition-type">crossfade</property>
-
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">main</property>
-            <property name="title">Main</property>
-            <property name="icon-name">go-home-symbolic</property>
-            <property name="child">
-              <object class="GtkBox" id="page_main">
-                <property name="orientation">vertical</property>
-                <property name="spacing">15</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">20</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">30</property>
-
-                <!-- Info Button at Top Right -->
-                <child>
-                  <object class="GtkBox" id="info_button_box">
-                    <property name="orientation">horizontal</property>
-                    <property name="halign">end</property>
-                    <property name="margin-bottom">10</property>
-                    <child>
-                      <object class="GtkButton" id="info_btn">
-                        <property name="halign">end</property>
-                        <property name="width-request">48</property>
-                        <property name="height-request">48</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">heart</property>
-                            <property name="pixel-size">24</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkBox" id="main_center_box">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">15</property>
-                    <property name="vexpand">true</property>
-                    <property name="valign">center</property>
-
-                    <child>
-                      <object class="GtkLabel" id="main_title">
-                        <property
-                                                    name="label"
-                                                >Fingerprint Authentication</property>
-                        <property name="halign">center</property>
+        <property name="content">
+            <object class="AdwToolbarView">
+                <child type="top">
+                    <object class="AdwHeaderBar" id="header_bar">
+                        <property name="show-title">true</property>
                         <style>
-                          <class name="title-1" />
+                            <class name="flat"/>
                         </style>
-                      </object>
-                    </child>
 
-                    <child>
-                      <object class="GtkImage" id="main_icon">
-                        <property name="icon-name">xfprintd-gui</property>
-                        <property name="pixel-size">64</property>
-                        <property name="halign">center</property>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkLabel" id="main_desc">
-                        <property
-                                                    name="label"
-                                                >Manage fingerprint authentication on your system, including enrollment and enabling fingerprint login, terminal use, and system prompts.</property>
-                        <property name="wrap">true</property>
-                        <property name="justify">center</property>
-                        <property name="halign">center</property>
-                        <property name="margin-bottom">10</property>
-                      </object>
-                    </child>
-
-                  </object>
+                        <!-- About button -->
+                        <child type="end">
+                            <object class="GtkButton" id="info_btn">
+                                <property name="tooltip-text">About</property>
+                                <child>
+                                    <object class="GtkImage">
+                                        <property name="icon-name">heart</property>
+                                        <property name="pixel-size">16</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
                 </child>
 
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">20</property>
-                    <child>
-                      <object class="GtkButton" id="manage_btn">
-                        <property name="label">Manage Fingerprints</property>
-                        <property name="halign">center</property>
-                        <property name="width-request">180</property>
-                        <property name="height-request">36</property>
-                        <style>
-                          <class name="suggested-action" />
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkListBox" id="switches_list">
-                    <property name="hexpand">true</property>
-                    <property name="vexpand">true</property>
-                    <property name="valign">end</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
-
-                    <child>
-                      <object class="GtkListBoxRow" id="row_header">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="hexpand">true</property>
-                            <child>
-                              <object
-                                                                class="GtkLabel"
-                                                                id="switches_section_title"
-                                                            >
-                                <property name="label">Configuration</property>
-                                <property name="halign">center</property>
-                                <style>
-                                  <class name="section-title" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-
-                    <child>
-                      <object class="GtkListBoxRow" id="row_switches_note">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="hexpand">true</property>
-                            <child>
-                              <object
-                                                                class="GtkLabel"
-                                                                id="switches_section_note"
-                                                            >
-                                <property
-                                                                    name="label"
-                                                                >Note: These switches will be active once at least one fingerprint is enrolled.</property>
-                                <property name="wrap">true</property>
-                                <property name="halign">center</property>
-                                <style>
-                                  <class name="toggle-hint" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkListBoxRow" id="row_login">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
+                <property name="content">
+                    <object class="GtkStack" id="stack">
+                        <property name="transition-type">crossfade</property>
 
                         <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">12</property>
-                            <property name="hexpand">true</property>
-                            <child>
-                              <object class="GtkBox" id="login_text_box">
-                                <property name="orientation">vertical</property>
-                                <property name="hexpand">true</property>
-                                <property name="halign">fill</property>
-                                <property name="valign">fill</property>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_login_title">
-                                    <property
-                                                                            name="label"
-                                                                        >Enable Authentication on Login</property>
-                                    <property name="halign">start</property>
-                                    <style>
-                                      <class name="toggle-title" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_login_hint">
-                                    <property
-                                                                            name="label"
-                                                                        >Use your fingerprint to sign into your session.</property>
-                                    <property name="wrap">true</property>
-                                    <property name="halign">start</property>
-                                    <style>
-                                      <class name="toggle-hint" />
-                                    </style>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox" id="login_controls_box">
-                                <property
-                                                                    name="orientation"
-                                                                >horizontal</property>
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="GtkButton" id="login_info_btn">
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
-                                    <property
-                                                                            name="tooltip-text"
-                                                                        >For SDDM login: Press Enter on an empty password field, then swipe your finger.</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property
-                                                                                    name="icon-name"
-                                                                                >dialog-information-symbolic</property>
-                                        <property
-                                                                                    name="pixel-size"
-                                                                                >16</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkSwitch" id="sw_login">
-                                    <property name="halign">end</property>
-                                    <property name="valign">center</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
+                            <object class="GtkStackPage">
+                                <property name="name">main</property>
+                                <property name="title">Main</property>
+                                <property name="icon-name">go-home-symbolic</property>
+                                <property name="child">
+                                    <object class="GtkBox" id="page_main">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">15</property>
+                                        <property name="margin-top">20</property>
+                                        <property name="margin-bottom">20</property>
+                                        <property name="margin-start">30</property>
+                                        <property name="margin-end">30</property>
+
+                                        <child>
+                                            <object class="GtkBox" id="main_center_box">
+                                                <property name="orientation">vertical</property>
+                                                <property name="spacing">15</property>
+                                                <property name="vexpand">true</property>
+                                                <property name="valign">center</property>
+
+                                                <child>
+                                                    <object class="GtkLabel" id="main_title">
+                                                        <property name="label">Fingerprint Authentication</property>
+                                                        <property name="halign">center</property>
+                                                        <style>
+                                                            <class name="title-1"/>
+                                                        </style>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkImage" id="main_icon">
+                                                        <property name="icon-name">fingerprint</property>
+                                                        <property name="pixel-size">64</property>
+                                                        <property name="halign">center</property>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkLabel" id="main_desc">
+                                                        <property name="label">Manage fingerprint authentication on your system, including enrollment and enabling fingerprint login, terminal use, and system prompts.</property>
+                                                        <property name="wrap">true</property>
+                                                        <property name="justify">center</property>
+                                                        <property name="halign">center</property>
+                                                        <property name="margin-bottom">10</property>
+                                                    </object>
+                                                </child>
+
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-top">20</property>
+                                                <child>
+                                                    <object class="GtkButton" id="manage_btn">
+                                                        <property name="label">Manage Fingerprints</property>
+                                                        <property name="halign">center</property>
+                                                        <property name="width-request">180</property>
+                                                        <property name="height-request">36</property>
+                                                        <style>
+                                                            <class name="suggested-action"/>
+                                                        </style>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkListBox" id="switches_list">
+                                                <property name="hexpand">true</property>
+                                                <property name="vexpand">true</property>
+                                                <property name="valign">end</property>
+                                                <style>
+                                                    <class name="boxed-list"/>
+                                                </style>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow" id="row_header">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+                                                        <child>
+                                                            <object class="GtkBox">
+                                                                <property name="hexpand">true</property>
+                                                                <child>
+                                                                    <object class="GtkLabel" id="switches_section_title">
+                                                                        <property name="label">Configuration</property>
+                                                                        <property name="halign">center</property>
+                                                                        <style>
+                                                                            <class name="section-title"/>
+                                                                        </style>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow" id="row_switches_note">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+                                                        <child>
+                                                            <object class="GtkBox">
+                                                                <property name="hexpand">true</property>
+                                                                <child>
+                                                                    <object class="GtkLabel" id="switches_section_note">
+                                                                        <property name="label">Note: These switches will be active once at least one fingerprint is enrolled.</property>
+                                                                        <property name="wrap">true</property>
+                                                                        <property name="halign">center</property>
+                                                                        <style>
+                                                                            <class name="toggle-hint"/>
+                                                                        </style>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+                                                        <child>
+                                                            <object class="GtkSeparator">
+                                                                <property name="margin-top">6</property>
+                                                                <property name="margin-bottom">6</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow" id="row_login">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+
+                                                        <child>
+                                                            <object class="GtkBox">
+                                                                <property name="orientation">horizontal</property>
+                                                                <property name="spacing">12</property>
+                                                                <property name="hexpand">true</property>
+                                                                <child>
+                                                                    <object class="GtkBox" id="login_text_box">
+                                                                        <property name="orientation">vertical</property>
+                                                                        <property name="hexpand">true</property>
+                                                                        <property name="halign">fill</property>
+                                                                        <property name="valign">fill</property>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_login_title">
+                                                                                <property name="label">Enable Authentication on Login</property>
+                                                                                <property name="halign">start</property>
+                                                                                <style>
+                                                                                    <class name="toggle-title"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_login_hint">
+                                                                                <property name="label">Use your fingerprint to sign into your session.</property>
+                                                                                <property name="wrap">true</property>
+                                                                                <property name="halign">start</property>
+                                                                                <style>
+                                                                                    <class name="toggle-hint"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="GtkBox" id="login_controls_box">
+                                                                        <property name="orientation">horizontal</property>
+                                                                        <property name="spacing">6</property>
+                                                                        <child>
+                                                                            <object class="GtkButton" id="login_info_btn">
+                                                                                <property name="halign">center</property>
+                                                                                <property name="valign">center</property>
+                                                                                <property name="tooltip-text">For SDDM login: Press Enter on an empty password field, then swipe your finger.</property>
+                                                                                <child>
+                                                                                    <object class="GtkImage">
+                                                                                        <property name="icon-name">dialog-information-symbolic</property>
+                                                                                        <property name="pixel-size">16</property>
+                                                                                    </object>
+                                                                                </child>
+                                                                            </object>
+                                                                        </child>
+                                                                        <child>
+                                                                            <object class="GtkSwitch" id="sw_login">
+                                                                                <property name="halign">end</property>
+                                                                                <property name="valign">center</property>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+                                                        <child>
+                                                            <object class="GtkSeparator">
+                                                                <property name="margin-top">6</property>
+                                                                <property name="margin-bottom">6</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                                <!-- Terminal row -->
+                                                <child>
+                                                    <object class="GtkListBoxRow" id="row_term">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+
+                                                        <child>
+                                                            <object class="GtkBox">
+                                                                <property name="orientation">horizontal</property>
+                                                                <property name="spacing">12</property>
+                                                                <property name="hexpand">true</property>
+                                                                <child>
+                                                                    <object class="GtkBox" id="term_text_box">
+                                                                        <property name="orientation">vertical</property>
+                                                                        <property name="hexpand">true</property>
+                                                                        <property name="halign">fill</property>
+                                                                        <property name="valign">fill</property>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_term_title">
+                                                                                <property name="label">Enable Authentication in Terminal</property>
+                                                                                <property name="halign">start</property>
+                                                                                <style>
+                                                                                    <class name="toggle-title"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_term_hint">
+                                                                                <property name="label">Use fingerprint for sudo and terminal prompts.</property>
+                                                                                <property name="wrap">true</property>
+                                                                                <property name="halign">start</property>
+                                                                                <style>
+                                                                                    <class name="toggle-hint"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="GtkSwitch" id="sw_term">
+                                                                        <property name="halign">end</property>
+                                                                        <property name="valign">center</property>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkListBoxRow">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+                                                        <child>
+                                                            <object class="GtkSeparator">
+                                                                <property name="margin-top">6</property>
+                                                                <property name="margin-bottom">6</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                                <!-- System prompt row -->
+                                                <child>
+                                                    <object class="GtkListBoxRow" id="row_prompt">
+                                                        <property name="selectable">false</property>
+                                                        <property name="activatable">false</property>
+
+                                                        <child>
+                                                            <object class="GtkBox">
+                                                                <property name="orientation">horizontal</property>
+                                                                <property name="spacing">12</property>
+                                                                <property name="hexpand">true</property>
+                                                                <child>
+                                                                    <object class="GtkBox" id="prompt_text_box">
+                                                                        <property name="orientation">vertical</property>
+                                                                        <property name="hexpand">true</property>
+                                                                        <property name="halign">fill</property>
+                                                                        <property name="valign">fill</property>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_prompt_title">
+                                                                                <property name="label">Enable Authentication in System Prompt</property>
+                                                                                <property name="halign">start</property>
+                                                                                <property name="margin-top">6</property>
+                                                                                <style>
+                                                                                    <class name="toggle-title"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                        <child>
+                                                                            <object class="GtkLabel" id="lbl_prompt_hint">
+                                                                                <property name="label">Use fingerprint for polkit and graphical prompts.</property>
+                                                                                <property name="wrap">true</property>
+                                                                                <property name="halign">start</property>
+                                                                                <property name="margin-bottom">6</property>
+                                                                                <style>
+                                                                                    <class name="toggle-hint"/>
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="GtkSwitch" id="sw_prompt">
+                                                                        <property name="halign">end</property>
+                                                                        <property name="valign">center</property>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                    </object>
+                                </property>
+                            </object>
                         </child>
-                      </object>
-                    </child>
 
-
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
                         <child>
-                          <object class="GtkSeparator">
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                          </object>
+                            <object class="GtkStackPage">
+                                <property name="name">manage</property>
+                                <property name="title">Manage</property>
+                                <property name="icon-name">system-search-symbolic</property>
+                                <property name="child">
+                                    <object class="GtkBox" id="page_manage">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">15</property>
+                                        <property name="margin-top">20</property>
+                                        <property name="margin-bottom">20</property>
+                                        <property name="margin-start">30</property>
+                                        <property name="margin-end">30</property>
+
+                                        <child>
+                                            <object class="GtkButton" id="back_btn">
+                                                <property name="label">← Back</property>
+                                                <property name="halign">start</property>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkLabel" id="manage_title">
+                                                <property name="label">Select a finger to manage</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-top">10</property>
+                                                <style>
+                                                    <class name="title-1"/>
+                                                </style>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkLabel" id="manage_desc">
+                                                <property name="label">Click on a finger below to add or remove fingerprints. Once at least one fingerprint is enrolled, login functionality will be unlocked.</property>
+                                                <property name="wrap">true</property>
+                                                <property name="justify">center</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-bottom">0</property>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkFlowBox" id="fingers_flow">
+                                                <property name="hexpand">true</property>
+                                                <property name="max-children-per-line">5</property>
+                                                <property name="row-spacing">20</property>
+                                                <property name="column-spacing">20</property>
+                                                <property name="homogeneous">true</property>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </property>
+                            </object>
                         </child>
-                      </object>
-                    </child>
-                    <!-- Terminal row -->
-                    <child>
-                      <object class="GtkListBoxRow" id="row_term">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
 
                         <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">12</property>
-                            <property name="hexpand">true</property>
-                            <child>
-                              <object class="GtkBox" id="term_text_box">
-                                <property name="orientation">vertical</property>
-                                <property name="hexpand">true</property>
-                                <property name="halign">fill</property>
-                                <property name="valign">fill</property>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_term_title">
-                                    <property
-                                                                            name="label"
-                                                                        >Enable Authentication in Terminal</property>
-                                    <property name="halign">start</property>
-                                    <style>
-                                      <class name="toggle-title" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_term_hint">
-                                    <property
-                                                                            name="label"
-                                                                        >Use fingerprint for sudo and terminal prompts.</property>
-                                    <property name="wrap">true</property>
-                                    <property name="halign">start</property>
-                                    <style>
-                                      <class name="toggle-hint" />
-                                    </style>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="sw_term">
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                          </object>
+                            <object class="GtkStackPage">
+                                <property name="name">finger</property>
+                                <property name="title">Finger</property>
+                                <property name="icon-name">preferences-system-symbolic</property>
+                                <property name="child">
+                                    <object class="GtkBox" id="page_finger">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">20</property>
+                                        <property name="margin-top">24</property>
+                                        <property name="margin-bottom">24</property>
+                                        <property name="margin-start">30</property>
+                                        <property name="margin-end">30</property>
+                                        <property name="vexpand">true</property>
+                                        <property name="valign">center</property>
+
+                                        <child>
+                                            <object class="GtkOverlay" id="finger_icon_overlay">
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                                <child>
+                                                    <object class="GtkImage" id="finger_icon">
+                                                        <property name="icon-name">fingerprint-symbolic</property>
+                                                        <property name="pixel-size">128</property>
+                                                        <property name="halign">center</property>
+                                                    </object>
+                                                </child>
+                                                <child type="overlay">
+                                                    <object class="GtkImage" id="finger_icon_manage_badge">
+                                                        <property name="icon-name">manage</property>
+                                                        <property name="halign">end</property>
+                                                        <property name="valign">end</property>
+                                                        <property name="pixel-size">40</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkLabel" id="finger_label">
+                                                <property name="label">Finger</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-top">6</property>
+                                                <property name="margin-bottom">6</property>
+                                                <style>
+                                                    <class name="title-2"/>
+                                                </style>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkLabel" id="action_label">
+                                                <property name="use-markup">true</property>
+                                                <property name="label"><![CDATA[<b>Place your finger on the scanner…</b>]]></property>
+                                                <property name="wrap">true</property>
+                                                <property name="justify">center</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-start">12</property>
+                                                <property name="margin-end">12</property>
+                                                <property name="margin-bottom">10</property>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkLabel" id="action_hint">
+                                                <property name="label">Keep your finger flat and centered. Lift and place again when asked.</property>
+                                                <property name="wrap">true</property>
+                                                <property name="justify">center</property>
+                                                <property name="halign">center</property>
+                                                <property name="margin-start">10</property>
+                                                <property name="margin-end">10</property>
+                                                <property name="margin-bottom">4</property>
+                                                <style>
+                                                    <class name="dim-label"/>
+                                                </style>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox" id="finger_buttons">
+                                                <property name="orientation">horizontal</property>
+                                                <property name="spacing">12</property>
+                                                <property name="halign">center</property>
+
+                                                <child>
+                                                    <object class="GtkButton" id="button_add">
+                                                        <property name="label">Add</property>
+                                                        <style>
+                                                            <class name="suggested-action"/>
+                                                        </style>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkButton" id="button_delete">
+                                                        <property name="label">Delete</property>
+                                                        <style>
+                                                            <class name="destructive-action"/>
+                                                        </style>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkButton" id="button_back">
+                                                        <property name="label">← Back</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                    </object>
+                                </property>
+                            </object>
                         </child>
-                      </object>
-                    </child>
 
-
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <!-- System prompt row -->
-                    <child>
-                      <object class="GtkListBoxRow" id="row_prompt">
-                        <property name="selectable">false</property>
-                        <property name="activatable">false</property>
-
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="spacing">12</property>
-                            <property name="hexpand">true</property>
-                            <child>
-                              <object class="GtkBox" id="prompt_text_box">
-                                <property name="orientation">vertical</property>
-                                <property name="hexpand">true</property>
-                                <property name="halign">fill</property>
-                                <property name="valign">fill</property>
-                                <child>
-                                  <object
-                                                                        class="GtkLabel"
-                                                                        id="lbl_prompt_title"
-                                                                    >
-                                    <property
-                                                                            name="label"
-                                                                        >Enable Authentication in System Prompt</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin-top">6</property>
-                                    <style>
-                                      <class name="toggle-title" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_prompt_hint">
-                                    <property
-                                                                            name="label"
-                                                                        >Use fingerprint for polkit and graphical prompts.</property>
-                                    <property name="wrap">true</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin-bottom">6</property>
-                                    <style>
-                                      <class name="toggle-hint" />
-                                    </style>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="sw_prompt">
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object>
-            </property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">manage</property>
-            <property name="title">Manage</property>
-            <property name="icon-name">system-search-symbolic</property>
-            <property name="child">
-              <object class="GtkBox" id="page_manage">
-                <property name="orientation">vertical</property>
-                <property name="spacing">15</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">20</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">30</property>
-
-
-                <child>
-                  <object class="GtkButton" id="back_btn">
-                    <property name="label">← Back</property>
-                    <property name="halign">start</property>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkLabel" id="manage_title">
-                    <property name="label">Select a finger to manage</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">10</property>
-                    <style>
-                      <class name="title-1" />
-                    </style>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkLabel" id="manage_desc">
-                    <property
-                                            name="label"
-                                        >Click on a finger below to add or remove fingerprints. Once at least one fingerprint is enrolled, login functionality will be unlocked.</property>
-                    <property name="wrap">true</property>
-                    <property name="justify">center</property>
-                    <property name="halign">center</property>
-                    <property name="margin-bottom">0</property>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkFlowBox" id="fingers_flow">
-                    <property name="hexpand">true</property>
-                    <property name="max-children-per-line">5</property>
-                    <property name="row-spacing">20</property>
-                    <property name="column-spacing">20</property>
-                    <property name="homogeneous">true</property>
-                  </object>
-                </child>
-              </object>
-            </property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">finger</property>
-            <property name="title">Finger</property>
-            <property name="icon-name">preferences-system-symbolic</property>
-            <property name="child">
-              <object class="GtkBox" id="page_finger">
-                <property name="orientation">vertical</property>
-                <property name="spacing">20</property>
-                <property name="margin-top">24</property>
-                <property name="margin-bottom">24</property>
-                <property name="margin-start">30</property>
-                <property name="margin-end">30</property>
-                <property name="vexpand">true</property>
-                <property name="valign">center</property>
-
-
-                <child>
-                  <object class="GtkOverlay" id="finger_icon_overlay">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <child>
-                      <object class="GtkImage" id="finger_icon">
-                        <property
-                                                    name="icon-name"
-                                                >fingerprint-symbolic</property>
-                        <property name="pixel-size">128</property>
-                        <property name="halign">center</property>
-                      </object>
-                    </child>
-                    <child type="overlay">
-                      <object class="GtkImage" id="finger_icon_manage_badge">
-                        <property name="icon-name">manage</property>
-                        <property name="halign">end</property>
-                        <property name="valign">end</property>
-                        <property name="pixel-size">40</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkLabel" id="finger_label">
-                    <property name="label">Finger</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">6</property>
-                    <property name="margin-bottom">6</property>
-                    <style>
-                      <class name="title-2" />
-                    </style>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkLabel" id="action_label">
-                    <property name="use-markup">true</property>
-                    <property
-                                            name="label"
-                                        ><![CDATA[<b>Place your finger on the scanner…</b>]]></property>
-                    <property name="wrap">true</property>
-                    <property name="justify">center</property>
-                    <property name="halign">center</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
-                    <property name="margin-bottom">10</property>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkLabel" id="action_hint">
-                    <property
-                                            name="label"
-                                        >Keep your finger flat and centered. Lift and place again when asked.</property>
-                    <property name="wrap">true</property>
-                    <property name="justify">center</property>
-                    <property name="halign">center</property>
-                    <property name="margin-start">10</property>
-                    <property name="margin-end">10</property>
-                    <property name="margin-bottom">4</property>
-                    <style>
-                      <class name="dim-label" />
-                    </style>
-                  </object>
-                </child>
-
-
-                <child>
-                  <object class="GtkBox" id="finger_buttons">
-                    <property name="orientation">horizontal</property>
-                    <property name="spacing">12</property>
-                    <property name="halign">center</property>
-
-                    <child>
-                      <object class="GtkButton" id="button_add">
-                        <property name="label">Add</property>
-                        <style>
-                          <class name="suggested-action" />
-                        </style>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkButton" id="button_delete">
-                        <property name="label">Delete</property>
-                        <style>
-                          <class name="destructive-action" />
-                        </style>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkButton" id="button_back">
-                        <property name="label">← Back</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object>
-            </property>
-          </object>
-        </child>
-
-      </object>
-    </child>
-  </object>
+                    </object>
+                </property>
+            </object>
+        </property>
+    </object>
 </interface>

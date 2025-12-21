@@ -81,13 +81,9 @@ fn setup_sddm_login_hint(window: &ApplicationWindow, builder: &Builder) {
 fn show_info_dialog(main_window: &ApplicationWindow) {
     let builder = Builder::from_resource("/xyz/xerolinux/xfprintd_gui/ui/info_dialog.ui");
 
-    let info_window: gtk4::Window = builder
-        .object("info_window")
-        .expect("Failed to get info_window");
+    let info_window: gtk4::Window = extract_widget(&builder, "info_window");
 
-    let close_button: Button = builder
-        .object("close_button")
-        .expect("Failed to get close_button");
+    let close_button: Button = extract_widget(&builder, "close_button");
 
     info_window.set_transient_for(Some(main_window));
 

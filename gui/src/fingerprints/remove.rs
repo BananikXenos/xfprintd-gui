@@ -2,6 +2,7 @@
 
 use crate::core::context::FingerprintContext;
 use crate::core::device_manager::{DeviceError, DeviceManager};
+use crate::ui::app::extract_widget;
 
 use gtk4::glib;
 
@@ -64,9 +65,7 @@ fn show_lockout_warning_dialog(finger_key: String, ctx: FingerprintContext) {
 
     let builder =
         gtk4::Builder::from_resource("/xyz/xerolinux/xfprintd_gui/ui/lockout_warning_dialog.ui");
-    let dialog: Window = builder
-        .object("lockout_warning_window")
-        .expect("Failed to get lockout_warning_window");
+    let dialog: Window = extract_widget(&builder, "lockout_warning_window");
 
     // Get parent window for modal behavior
     if let Some(toplevel) = ctx.ui.stack.root() {
@@ -75,15 +74,9 @@ fn show_lockout_warning_dialog(finger_key: String, ctx: FingerprintContext) {
         }
     }
 
-    let cancel_button: Button = builder
-        .object("cancel_button")
-        .expect("Failed to get cancel_button");
-    let proceed_button: Button = builder
-        .object("proceed_button")
-        .expect("Failed to get proceed_button");
-    let confirmation_check: CheckButton = builder
-        .object("confirmation_check")
-        .expect("Failed to get confirmation_check");
+    let cancel_button: Button = extract_widget(&builder, "cancel_button");
+    let proceed_button: Button = extract_widget(&builder, "proceed_button");
+    let confirmation_check: CheckButton = extract_widget(&builder, "confirmation_check");
 
     // Enable/disable proceed button based on checkbox state
     let proceed_button_clone = proceed_button.clone();
