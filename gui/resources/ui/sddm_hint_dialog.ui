@@ -30,21 +30,37 @@
 
                         <child>
                             <object class="GtkBox" id="sddm_hint_title_box">
-                                <property name="orientation">horizontal</property>
+                                <property
+                                    name="orientation"
+                                >horizontal</property>
                                 <property name="spacing">10</property>
                                 <property name="halign">center</property>
                                 <child>
-                                    <object class="GtkImage" id="sddm_hint_icon">
-                                        <property name="icon-name">dialog-information-symbolic</property>
-                                        <property name="pixel-size">40</property>
+                                    <object
+                                        class="GtkImage"
+                                        id="sddm_hint_icon"
+                                    >
+                                        <property
+                                            name="icon-name"
+                                        >dialog-information-symbolic</property>
+                                        <property
+                                            name="pixel-size"
+                                        >40</property>
                                     </object>
                                 </child>
                                 <child>
-                                    <object class="GtkLabel" id="sddm_hint_title_label">
-                                        <property name="label">Fingerprint Login with SDDM</property>
-                                        <property name="halign">center</property>
+                                    <object
+                                        class="GtkLabel"
+                                        id="sddm_hint_title_label"
+                                    >
+                                        <property
+                                            name="label"
+                                        >Fingerprint Login with SDDM</property>
+                                        <property
+                                            name="halign"
+                                        >center</property>
                                         <style>
-                                            <class name="title-2"/>
+                                            <class name="title-2" />
                                         </style>
                                     </object>
                                 </child>
@@ -57,7 +73,9 @@
                                 <property name="wrap">true</property>
                                 <property name="justify">center</property>
                                 <property name="halign">center</property>
-                                <property name="label"><![CDATA[<b>SDDM</b> greeter currently doesn't <i>natively</i> support fingerprint login, so it will not display a "scan your finger" prompt.
+                                <property
+                                    name="label"
+                                ><![CDATA[<b>SDDM</b> greeter currently doesn't <i>natively</i> support fingerprint login, so it will not display a "scan your finger" prompt.
 
 To unlock using your fingerprint:
 1. Select your user (if needed)
@@ -71,21 +89,27 @@ This is a temporary hack until native support is added (if ever, lol).]]></prope
 
                         <child>
                             <object class="GtkBox" id="sddm_hint_button_box">
-                                <property name="orientation">horizontal</property>
+                                <property
+                                    name="orientation"
+                                >horizontal</property>
                                 <property name="halign">center</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                    <object class="GtkButton" id="sddm_hint_close_button">
+                                    <object
+                                        class="GtkButton"
+                                        id="sddm_hint_close_button"
+                                    >
                                         <property name="label">Close</property>
-                                        <property name="width-request">100</property>
+                                        <property
+                                            name="width-request"
+                                        >100</property>
                                         <style>
-                                            <class name="suggested-action"/>
+                                            <class name="suggested-action" />
                                         </style>
                                     </object>
                                 </child>
                             </object>
                         </child>
-
                     </object>
                 </property>
             </object>

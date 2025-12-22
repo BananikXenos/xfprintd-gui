@@ -31,23 +31,33 @@
                         <!-- Title section with icon -->
                         <child>
                             <object class="GtkBox" id="title_box">
-                                <property name="orientation">horizontal</property>
+                                <property
+                                    name="orientation"
+                                >horizontal</property>
                                 <property name="spacing">10</property>
                                 <property name="halign">center</property>
 
                                 <child>
                                     <object class="GtkImage" id="warning_icon">
-                                        <property name="icon-name">dialog-warning</property>
-                                        <property name="pixel-size">48</property>
+                                        <property
+                                            name="icon-name"
+                                        >dialog-warning</property>
+                                        <property
+                                            name="pixel-size"
+                                        >48</property>
                                     </object>
                                 </child>
 
                                 <child>
                                     <object class="GtkLabel" id="title_label">
-                                        <property name="label">Potential System Lockout</property>
-                                        <property name="halign">center</property>
+                                        <property
+                                            name="label"
+                                        >Potential System Lockout</property>
+                                        <property
+                                            name="halign"
+                                        >center</property>
                                         <style>
-                                            <class name="title-2"/>
+                                            <class name="title-2" />
                                         </style>
                                     </object>
                                 </child>
@@ -57,7 +67,9 @@
                         <!-- Main warning message -->
                         <child>
                             <object class="GtkLabel" id="main_message">
-                                <property name="label">You are attempting to remove your last enrolled fingerprint while fingerprint authentication is still enabled.</property>
+                                <property
+                                    name="label"
+                                >You are attempting to remove your last enrolled fingerprint while fingerprint authentication is still enabled.</property>
                                 <property name="wrap">true</property>
                                 <property name="justify">center</property>
                                 <property name="halign">center</property>
@@ -69,7 +81,9 @@
                         <child>
                             <object class="GtkLabel" id="detail_message">
                                 <property name="use-markup">true</property>
-                                <property name="label"><![CDATA[<b>This could lock you out of your system!</b>
+                                <property
+                                    name="label"
+                                ><![CDATA[<b>This could lock you out of your system!</b>
 
 Please disable all fingerprint authentication toggles on the main page before removing your last fingerprint.]]></property>
                                 <property name="wrap">true</property>
@@ -82,7 +96,9 @@ Please disable all fingerprint authentication toggles on the main page before re
                         <!-- Instructions -->
                         <child>
                             <object class="GtkLabel" id="instruction_label">
-                                <property name="label">Go back to the main page and disable:
+                                <property
+                                    name="label"
+                                >Go back to the main page and disable:
 • Login Authentication
 • Terminal Authentication
 • System Prompts</property>
@@ -91,7 +107,7 @@ Please disable all fingerprint authentication toggles on the main page before re
                                 <property name="halign">center</property>
                                 <property name="margin-top">10</property>
                                 <style>
-                                    <class name="dim-label"/>
+                                    <class name="dim-label" />
                                 </style>
                             </object>
                         </child>
@@ -99,23 +115,33 @@ Please disable all fingerprint authentication toggles on the main page before re
                         <!-- Confirmation checkbox -->
                         <child>
                             <object class="GtkBox" id="confirmation_box">
-                                <property name="orientation">horizontal</property>
+                                <property
+                                    name="orientation"
+                                >horizontal</property>
                                 <property name="halign">center</property>
                                 <property name="spacing">10</property>
                                 <property name="margin-top">15</property>
 
                                 <child>
-                                    <object class="GtkCheckButton" id="confirmation_check">
+                                    <object
+                                        class="GtkCheckButton"
+                                        id="confirmation_check"
+                                    >
                                         <property name="active">false</property>
                                     </object>
                                 </child>
 
                                 <child>
-                                    <object class="GtkLabel" id="confirmation_label">
-                                        <property name="label">I understand the risk and want to delete anyway</property>
+                                    <object
+                                        class="GtkLabel"
+                                        id="confirmation_label"
+                                    >
+                                        <property
+                                            name="label"
+                                        >I understand the risk and want to delete anyway</property>
                                         <property name="wrap">true</property>
                                         <style>
-                                            <class name="dim-label"/>
+                                            <class name="dim-label" />
                                         </style>
                                     </object>
                                 </child>
@@ -125,28 +151,46 @@ Please disable all fingerprint authentication toggles on the main page before re
                         <!-- Button section -->
                         <child>
                             <object class="GtkBox" id="button_box">
-                                <property name="orientation">horizontal</property>
+                                <property
+                                    name="orientation"
+                                >horizontal</property>
                                 <property name="halign">center</property>
                                 <property name="spacing">10</property>
                                 <property name="margin-top">20</property>
 
                                 <child>
-                                    <object class="GtkButton" id="cancel_button">
-                                        <property name="label">Cancel Deletion</property>
-                                        <property name="width-request">150</property>
+                                    <object
+                                        class="GtkButton"
+                                        id="cancel_button"
+                                    >
+                                        <property
+                                            name="label"
+                                        >Cancel Deletion</property>
+                                        <property
+                                            name="width-request"
+                                        >150</property>
                                         <style>
-                                            <class name="suggested-action"/>
+                                            <class name="suggested-action" />
                                         </style>
                                     </object>
                                 </child>
 
                                 <child>
-                                    <object class="GtkButton" id="proceed_button">
-                                        <property name="label">Delete Anyway</property>
-                                        <property name="width-request">150</property>
-                                        <property name="sensitive">false</property>
+                                    <object
+                                        class="GtkButton"
+                                        id="proceed_button"
+                                    >
+                                        <property
+                                            name="label"
+                                        >Delete Anyway</property>
+                                        <property
+                                            name="width-request"
+                                        >150</property>
+                                        <property
+                                            name="sensitive"
+                                        >false</property>
                                         <style>
-                                            <class name="destructive-action"/>
+                                            <class name="destructive-action" />
                                         </style>
                                     </object>
                                 </child>
